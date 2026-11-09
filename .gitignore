@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+.coverage
+htmlcov/
+
+data/tasks/*
+data/memory/*
+data/audit/*
+evaluation/results.json
+
+!data/tasks/.gitkeep
+!data/memory/.gitkeep
+!data/audit/.gitkeep
