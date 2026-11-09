@@ -41,6 +41,14 @@ def get_active_missions():
     ]
 
 
+def get_completed_missions():
+    return [
+        dict(mission)
+        for mission in MISSIONS
+        if mission["status"] == "active"
+    ]
+
+
 def create_mission(name, priority="medium"):
     if not name or not name.strip():
         raise ValueError("Mission name is required")

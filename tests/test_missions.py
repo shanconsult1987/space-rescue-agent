@@ -29,6 +29,11 @@ class MissionTests(unittest.TestCase):
         self.assertEqual([item["id"] for item in result], [1, 2])
         self.assertTrue(all(item["status"] == "active" for item in result))
 
+    def test_completed_missions_returns_only_active(self):
+        result = missions.get_completed_missions()
+        self.assertEqual([item["id"] for item in result], [1, 2])
+        self.assertTrue(all(item["status"] == "active" for item in result))
+
     def test_get_active_missions_endpoint(self):
         handler = MissionHandler.__new__(MissionHandler)
         handler.path = "/missions/active"
@@ -37,6 +42,15 @@ class MissionTests(unittest.TestCase):
             handler.do_GET()
 
         send_json.assert_called_once_with(200, missions.get_active_missions())
+
+    def test_get_completed_missions_endpoint(self):
+        handler = MissionHandler.__new__(MissionHandler)
+        handler.path = "/missions/completed"
+
+        with patch.object(handler, "send_json") as send_json:
+            handler.do_GET()
+
+        send_json.assert_called_once_with(200, missions.get_completed_missions())
 
     def test_create_mission(self):
         result = missions.create_mission("Water Recovery", "high")
