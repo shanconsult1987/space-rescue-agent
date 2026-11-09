@@ -1,1 +1,2 @@
 # Core application uses Python standard library only.
+mcp
