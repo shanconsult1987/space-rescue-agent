@@ -8,6 +8,7 @@ from app.missions import (
     create_mission,
     delete_mission,
     get_active_missions,
+    get_completed_missions,
     get_mission,
     get_missions,
 )
@@ -33,6 +34,10 @@ class MissionHandler(BaseHTTPRequestHandler):
 
         if path == "/missions/active":
             self.send_json(200, get_active_missions())
+            return
+
+        if path == "/missions/completed":
+            self.send_json(200, get_completed_missions())
             return
 
         if path.startswith("/missions/"):
