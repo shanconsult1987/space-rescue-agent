@@ -1,0 +1,30 @@
+{
+  "evaluation_id": "SPACERESCUE-ACTIVE-MISSIONS",
+  "description": "Validate active mission filtering",
+  "cases": [
+    {
+      "id": "EVAL-001",
+      "name": "Active mission function exists",
+      "type": "function",
+      "expected": true
+    },
+    {
+      "id": "EVAL-002",
+      "name": "Active mission function filters completed records",
+      "type": "filter",
+      "expected": true
+    },
+    {
+      "id": "EVAL-003",
+      "name": "Active endpoint is implemented",
+      "type": "endpoint",
+      "expected": true
+    },
+    {
+      "id": "EVAL-004",
+      "name": "Unit test suite passes",
+      "type": "tests",
+      "expected": true
+    }
+  ]
+}
