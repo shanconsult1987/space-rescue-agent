@@ -1,6 +1,8 @@
 import unittest
+from unittest.mock import patch
 
 from app import missions
+from app.server import MissionHandler
 
 
 class MissionTests(unittest.TestCase):
@@ -24,10 +26,17 @@ class MissionTests(unittest.TestCase):
 
     def test_active_missions_excludes_completed(self):
         result = missions.get_active_missions()
-        self.assertEqual(len(result), 2)
-        self.assertTrue(
-            all(item["status"] == "active" for item in result)
-        )
+        self.assertEqual([item["id"] for item in result], [1, 2])
+        self.assertTrue(all(item["status"] == "active" for item in result))
+
+    def test_get_active_missions_endpoint(self):
+        handler = MissionHandler.__new__(MissionHandler)
+        handler.path = "/missions/active"
+
+        with patch.object(handler, "send_json") as send_json:
+            handler.do_GET()
+
+        send_json.assert_called_once_with(200, missions.get_active_missions())
 
     def test_create_mission(self):
         result = missions.create_mission("Water Recovery", "high")
